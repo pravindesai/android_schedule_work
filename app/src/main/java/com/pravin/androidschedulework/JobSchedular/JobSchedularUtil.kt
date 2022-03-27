@@ -12,6 +12,7 @@ import androidx.core.os.persistableBundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.pravin.androidschedulework.AlarmManager.AlarmManagerUtil
+import com.pravin.androidschedulework.JobSchedular.MyJobService.Companion.JOB_ID
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -19,7 +20,6 @@ object JobSchedularUtil {
     private val TAG = "**JOB_SCHEDULAR_UTIL"
     private val JOB_SCHEDULAR_PICKER_TAG = "JOB_SCHEDULAR"
     private lateinit var calendar:Calendar
-    private var JOB_ID = 1
 
     private lateinit var jobSchedular:JobScheduler
 

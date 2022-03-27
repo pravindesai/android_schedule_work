@@ -12,19 +12,19 @@ class MyJobService :JobService() {
 
     override fun onStartJob(params: JobParameters?): Boolean {
         //Job should be performed in background otherwise ANR will occur
-        val JOBID = params?.extras?.getInt(JOBIDKEY)?:"NULLKEY"
-        doInBackground(JOBID)
+        doInBackground(params)
         return true
     }
 
-    private fun doInBackground(JOBID: Any) {
+    private fun doInBackground(params: JobParameters?) {
+        val JOBID = params?.extras?.getInt(JOBIDKEY)?:"NULLKEY"
+
         Log.e(TAG, "doInBackground: Job running " )
-        CoroutineScope(Dispatchers.IO).launch {
-            for (i in 1..100){
-                Log.e(TAG, "JOB ID-> $JOBID  : "+i )
+            for (i in 1..10){
+                Log.e(TAG, "JOB ID-> $JOBID  : "+i+"  "+Thread.currentThread().name )
                 Thread.sleep(1000)
             }
-        }
+
     }
 
     override fun onStopJob(params: JobParameters?): Boolean {
@@ -33,10 +33,17 @@ class MyJobService :JobService() {
         return true
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        JOB_ID = 0
+        Log.e(TAG, "Service Destroyed " )
+    }
+
     companion object {
         const val MIN:Int = 0
         const val MAX:Int = 5
         const val JOBIDKEY = "jobidkey"
         private const val TAG = "**MyJobSchedular"
+        var JOB_ID = 0
     }
 }
