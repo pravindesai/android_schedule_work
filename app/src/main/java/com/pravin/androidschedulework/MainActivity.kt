@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.pravin.androidschedulework.AlarmManager.AlarmManagerUtil
 import com.pravin.androidschedulework.JobSchedular.JobSchedularUtil
+import com.pravin.androidschedulework.WorkManager.WorkManagerUtil
 import com.pravin.androidschedulework.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             }
             binding.workManager->{
-
+                WorkManagerUtil.scheduleWork(this)
             }
         }
     }
